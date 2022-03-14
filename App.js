@@ -1,20 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Start from "/Users/apple/waw/Screens/Start.js";
+import Srgan from "/Users/apple/waw/Components/Srgan.js";
+import ImagePickerSample from "/Users/apple/waw/Components/ImagePickerSample.js";
+import Tfjs from "/Users/apple/waw/Components/Tfjs.js";
+import ImageLiftup from "/Users/apple/waw/Screens/ImageLiftUp.js";
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+const FirstScrren = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Stack.Navigator
+      initialRouteName="Start"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "rgb(167,87,168)",
+        },
+      }}
+    >
+      <Stack.Screen name="Tfjs" component={Tfjs} />
+      <Stack.Screen name="Start" component={Start} />
+      <Stack.Screen name="ImageLiftup" component={ImageLiftup} />
+      <Stack.Screen name="ImagePickerSample" component={ImagePickerSample} />
+      <Stack.Screen name="Srgan" component={Srgan} />
+    </Stack.Navigator>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const App = () => {
+  return (
+    <NavigationContainer>
+      <FirstScrren />
+    </NavigationContainer>
+  );
+};
+
+export default App;
