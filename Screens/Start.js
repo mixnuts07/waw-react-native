@@ -6,29 +6,28 @@ import {
   Image,
   TouchableHighlight,
 } from "react-native";
-import Icon from "react-native-vector-icons/Entypo";
+import Icon from "react-native-vector-icons/AntDesign";
+import { Fragment } from "react/cjs/react.production.min";
 
 const Start = (props) => {
   return (
     <View style={styles.container}>
-      <Icon
-        name="language"
-        color="rgb(167,87,168)"
-        size={80}
-        style={styles.icon}
-      ></Icon>
-      <Image
-        style={styles.waw}
-        source={require("/Users/apple/waw/assets/waw.png")}
-      />
-
       <TouchableHighlight
         onPress={() => {
           props.navigation.navigate("ImageLiftup");
         }}
       >
-        <Text style={styles.button}>Start</Text>
+        <Fragment>
+          <Icon
+            name="aliwangwang-o1"
+            color="rgba(8,120,0,0.6)"
+            size={80}
+            style={styles.icon}
+          ></Icon>
+          <Text style={styles.button}>Start</Text>
+        </Fragment>
       </TouchableHighlight>
+
       <Image
         style={styles.chara}
         source={require("/Users/apple/waw/assets/chara.png")}
@@ -39,8 +38,8 @@ const Start = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "lightblue",
-    flex: 1,
+    backgroundColor: "rgba(110,128,128,0.9)",
+    flex: 0.7,
     alignItems: "center",
     padding: 50,
   },
@@ -56,13 +55,13 @@ const styles = StyleSheet.create({
     flex: 0.1,
     width: 100,
     height: 100,
-    borderColor: "rgb(167,87,168)",
+    borderColor: "rgba(8,120,0,0.6)",
     borderWidth: 10,
     alignSelf: "flex-start",
   },
   button: {
     flex: 0.5,
-    color: "rgba(167,87,168,0.8)",
+    color: "rgba(8,120,0,0.6)",
     textShadowColor: "purple",
     fontSize: 60,
     fontWeight: "bold",

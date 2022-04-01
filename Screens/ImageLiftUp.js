@@ -1,10 +1,11 @@
 import { View, Button, Image } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ImagePickerSample from "/Users/apple/waw/Components/ImagePickerSample.js";
-import Tfjs from "/Users/apple/waw/Components/Tfjs.js";
+import Srgan from "../Components/Srgan";
+import storage from "/Users/apple/waw/Storage.js";
 
-const ImageLiftup = () => {
+const ImageLiftup = (props) => {
   const [image, setImage] = useState(null);
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -13,24 +14,27 @@ const ImageLiftup = () => {
       aspect: [4, 3],
       quality: 1,
     });
-
-    console.log(result);
-
+    console.log(`result  :${result}`);
     if (!result.cancelled) {
+      console.log(`result.uri : ${result.uri}`);
       setImage(result.uri);
-      //setImage(result.uri);
-      //console.log(`1image: ${{ props.image }}`);
-      console.log(`1image: ${{ uri: image }}`);
-      console.log(`2result:uri : ${result.uri}`);
+      console.log(`----------------------------------------------`);
+      //Storage保存
+      storage.save({
+        key: "uploadImage",
+        data: { resultId: result.uri },
+      });
     }
   };
+  //const [prediction, setPrediction] = useState(null);
+  //const SaveImage = () => {};
+
+  // const Saved = () => {};
 
   return (
     <View style={styles.imagePickerStyle}>
-      {!image && (
-        <ImagePickerSample value={image} pickImage={() => pickImage()} />
-      )}
-      {image && <Tfjs tfjsImage={image} />}
+      {!image && <ImagePickerSample pickImage={() => pickImage()} />}
+      {image && <Srgan navigation={props.navigation} />}
     </View>
   );
 };
@@ -46,14 +50,14 @@ const styles = {
     flex: 0.5,
     alignItems: "center",
     justifyContent: "center",
-  },
-  button: {
-    flex: 0.5,
-    color: "rgba(167,87,168,0.8)",
-    textShadowColor: "purple",
-    fontSize: 60,
-    fontWeight: "bold",
-    letterSpacing: 5,
+    // },
+    // button: {
+    //   flex: 0.5,
+    //   color: "rgba(167,87,168,0.8)",
+    //   textShadowColor: "purple",
+    //   fontSize: 60,
+    //   fontWeight: "bold",
+    //   letterSpacing: 5,
   },
 };
 

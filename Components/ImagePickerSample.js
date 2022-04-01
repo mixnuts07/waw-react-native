@@ -1,14 +1,22 @@
-import { View, Button, Image } from "react-native";
+import { View, Button, Image, TouchableHighlight, Text } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { useState } from "react";
+import { Fragment, useState } from "react";
+import Icon from "react-native-vector-icons/AntDesign";
 
-const ImagePickerSample = ({ value, pickImage }) => {
+const ImagePickerSample = ({ pickImage }) => {
   return (
     <View style={styles.imagePickerStyle}>
-      <Button
-        title="Pick an image from camera roll"
-        onPress={() => pickImage()}
-      />
+      <TouchableHighlight onPress={() => pickImage()}>
+        <Fragment>
+          <Icon
+            name="upload"
+            color="rgba(8,120,0,0.6)"
+            size={80}
+            style={styles.icon}
+          ></Icon>
+          <Text>画像を選択</Text>
+        </Fragment>
+      </TouchableHighlight>
     </View>
   );
 };
